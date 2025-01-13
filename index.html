@@ -11,48 +11,40 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             min-height: 100vh;
         }
-
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         /* Header y Navegación */
         .header {
             padding: 1rem 0;
         }
-
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             color: #fcd34d;
             font-size: 2rem;
             font-weight: bold;
             text-decoration: none;
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
-
         .nav-item {
             text-align: center;
         }
-
         .nav-link {
             color: white;
             text-decoration: none;
@@ -61,30 +53,24 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .nav-link:hover {
             color: #fcd34d;
         }
-
         .nav-icon {
             width: 24px;
             height: 24px;
         }
-
         .social-links {
             display: flex;
             gap: 1rem;
         }
-
         .social-link {
             color: white;
             text-decoration: none;
         }
-
         .social-link.whatsapp { color: #25D366; }
         .social-link.instagram { color: #E4405F; }
         .social-link.youtube { color: #FF0000; }
-
         /* Hero Section */
         .hero {
             padding: 4rem 0;
@@ -92,46 +78,60 @@
             display: flex;
             align-items: center;
         }
-
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             align-items: center;
         }
-
         .hero-text h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
         }
-
         .hero-text p {
             font-size: 1.5rem;
             opacity: 0.9;
         }
-
         .hero-image {
             text-align: right;
         }
-
         .hero-image img {
             max-width: 100%;
             height: auto;
         }
-
+        /* Botón del menú */
+        .menu-button {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #1d4ed8;
+                width: 100%;
+                z-index: 10;
             }
-
+            .nav-links.active {
+                display: flex;
+            }
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
             .hero-image {
                 text-align: center;
+            }
+            .menu-button {
+                display: block;
             }
         }
     </style>
@@ -140,7 +140,7 @@
     <header class="header">
         <nav class="nav container">
             <a href="/" class="logo">EduCom</a>
-            
+            <button class="menu-button" aria-label="Abrir menú">&#9776;</button>
             <ul class="nav-links">
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -191,7 +191,6 @@
                     </a>
                 </li>
             </ul>
-
             <div class="social-links">
                 <a href="#" class="social-link whatsapp">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -209,9 +208,9 @@
                     </svg>
                 </a>
             </div>
+
         </nav>
     </header>
-
     <main>
         <section class="hero">
             <div class="container">
@@ -226,28 +225,30 @@
                 </div>
             </div>
         </section>
-    </main>
-
-    <section class="perfil-section">
-        <div class="container">
-            <div class="perfil-grid">
-                <div class="perfil-imagen">
-                    <img src="/img/001.jpg" alt="Orador en conferencia">
-                </div>
-                <div class="perfil-contenido">
-                    <h2>Perfil empresarial</h2>
-                    <p>Fundada en 2020, Academia de oratoria Educom es una empresa que ofrece servicios de capacitación en el desarrollo de habilidades blandas como la oratoria y comuncación efetiva.</p>
-                    <a href="#" class="btn-mas-info">Más información ›</a>
+        <section class="perfil-section">
+            <div class="container">
+                <div class="perfil-grid">
+                    <div class="perfil-imagen">
+                        <img src="/img/001.jpg" alt="Orador en conferencia">
+                    </div>
+                    <div class="perfil-contenido">
+                        <h2>Perfil empresarial</h2>
+                        <p>Fundada en 2020, Academia de oratoria Educom es una empresa que ofrece servicios de capacitación en el desarrollo de habilidades blandas como la oratoria y comunicación efectiva.</p>
+                        <a href="#" class="btn-mas-info">Más información ›</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    </main>
     <script>
-        // Menú responsive (puedes expandir esta funcionalidad según necesites)
+        // Menú responsive
         document.addEventListener('DOMContentLoaded', function() {
-            // Aquí puedes agregar la lógica para un menú móvil
-            // Por ejemplo, un botón que muestre/oculte el menú en dispositivos móviles
+            const menuButton = document.querySelector('.menu-button');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
         });
     </script>
 </body>
